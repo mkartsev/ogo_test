@@ -1,60 +1,377 @@
-/* By Athlon Front-End Team */
-
-/* Core variables */
+@import 'base/reset';
+@import 'base/fonts';
+@import 'base/functions';
+@import 'base/mixins';
 @import 'base/vars';
 
-/* CSS Reset */
-@import 'base/reset';
+@import 'components/popup';
+@import 'components/magnific-popup';
+@import 'components/magnific-popup-animations';
 
-/* CSS print */
-@import 'base/print';
-
-/* Fonts */
-@import 'base/fonts';
-
-/* Mixins, helpers and functions */
-@import 'base/mixins';
-
-/* Vendor */
-
-/* Components */
-
-/* Browser specific styles */
-@import 'dirty/hacks';
-
-/* Demo styles */
-
+html {
+  font-size: 100%;
+}
 body {
-  background: $body-background-color;
-  color: $foreground-color;
-  font-family: 'DINP-R', arial, serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-width: 320px;
+  min-height: 100vh;
+  color: $body-font-color;
+  font-size: 1rem;
+  font-family: $body-font-family;
+  font-weight: 300;
+  line-height:  1.4;
+  background: $body-background;
 }
-
-header {
-  font-size: 2em;
-  margin: 20px;
-  color: $caption-color;
-  text-align: center;
-  background: $foreground-color url('../images/design/heading.png') center 20px no-repeat;
-  padding: 60px 30px 30px;
-  background-size: 160px;
+h1, h2, h3, h4, h5, h6 {
+  color: $heading-color;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  @include breakpoint(medium) {
+    margin-bottom: rem-calc(13);
+  }
+  @include breakpoint(large) {
+    margin-bottom: rem-calc(13);
+  }
 }
-
-main {
-  color: $foreground-color;
-  text-align: center;
-  padding: 10px;
+h2 {
+  font-size: rem-calc(26);
 }
-
+h6 {
+  margin-bottom: 15px;
+  font-size: rem-calc(18);
+  line-height: 1.22;
+}
+label {
+  display: block;
+  width: 100%;
+  color: #7e7e7e;
+  font-size: rem-calc(13);
+  line-height: rem-calc(19);
+}
+input {
+  @each $type in (text, password, date, datetime, datetime-local, month, week, email, number, search, tel, time, url, color) {
+    &[type='#{$type}'] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      font-family: $body-font-family;
+      font-size: rem-calc(14);
+      background: $white;
+      border: 1px solid $light-gray;
+      box-shadow: inset 3px 3px 4px rgba($black, 0.05);
+      transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      &:focus {
+        box-shadow: none;
+        border-color: $dark-gray;
+      }
+    }
+  }
+}
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: $body-font-family;
+  background: $white;
+  border: 1px solid $light-gray;
+  box-shadow: inset 3px 3px 4px rgba($black, 0.05);
+  transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  &:focus {
+    box-shadow: none;
+    border-color: $dark-gray;
+  }
+}
+textarea {
+  resize: none;
+}
 a {
   color: $link-color;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 }
-
-address {
-  color: $accent-color;
-}
-
-.logo {
-  margin: 0 auto;
+svg {
   display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  fill: currentColor;
+}
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 14px;
+  color: $white;
+  font-size: rem-calc(14);
+  line-height: rem-calc(20);
+  text-align: center;
+  text-decoration: none;
+  background: $link-color;
+  border: none; //1px solid $link-color;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+  &__body {}
+  &__prefix {}
+  &__suffix {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+  }
+  &.alert {
+    color: $white;
+    background: $alert-color;
+    border-color: $alert-color;
+    &:hover {
+      background-color: darken($alert-color, 5%);
+    }
+  }
+  &.light-gray {
+    color: #4a4a4a;
+    background: $light-gray;
+    border-color: $light-gray;
+    &:hover {
+      background-color: darken($light-gray, 5%);
+    }
+  }
+  &.expanded {
+    width: 100%;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: darken($link-color, 5%);
+  }
+}
+.content {
+  width: 100%;
+  max-width: $global-width;
+  margin: 0 auto;
+}
+.field {
+  &.required {
+    label {
+      &:after {
+        display: inline;
+        content: ' *';
+        color: $alert-color;
+      }
+    }
+  }
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /**
+  ну пусть будет по центру
+  */
+  justify-content: center;
+}
+.panel {
+  padding: 11px 14px;
+  background: $medium-gray;
+  &__title {
+    font-weight: normal;
+  }
+}
+.section {
+  padding: 15px 16px;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  &-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5rem -16px 0;
+  }
+  &-content {
+    flex: 1 0 100%;
+  }
+  &-sidebar {
+    display: none;
+  }
+  &__title {
+    &.has-toggler {
+      position: relative;
+      padding-right: 20px;
+    }
+  }
+  &__toggler {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: background-color 0.25s ease-in-out, transform 0.25s;
+    &.is-active {
+      transform: rotate(180deg);
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($dark-gray, 0.5);
+    }
+  }
+  @include breakpoint(medium) {
+    padding: 15px 16px;
+    &-body {
+      margin-right: 0;
+      margin-left: 0;
+    }
+    &-content {
+      flex: 3 3 calc(75% - 14px);
+      max-width: calc(75% - 14px);
+      margin-right: 14px;
+    }
+    &-sidebar {
+      display: block;
+      flex: 1 1 25%;
+    }
+    &__toggler {
+      display: none;
+    }
+  }
+  @include breakpoint(large) {
+    padding: 30px 35px;
+    border: 1px solid $light-gray;
+    &-body {
+      margin-right: 0;
+      margin-left: 0;
+    }
+    &-content {
+      flex: 3 3 calc(75% - 14px);
+      max-width: calc(75% - 14px);
+      margin-right: 14px;
+    }
+    &-sidebar {
+      display: block;
+      flex: 1 1 25%;
+    }
+    &__toggler {
+      display: none;
+    }
+  }
+}
+.question {
+  margin-bottom: 14px;
+  padding: 20px;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  &-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    min-height: 60px;
+    padding-left: 82px;
+    &__name {
+      font-size: rem-calc(24);
+      line-height: rem-calc(28);
+      font-weight: 300;
+    }
+    &__image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      z-index: 1;
+      &--placeholder {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        font-size: rem-calc(32);
+        line-height: 1;
+        background: $light-gray;
+      }
+    }
+  }
+  &-header {
+    margin-bottom: 4px;
+  }
+  &-body {
+    margin-bottom: 20px;
+    padding-left: 82px;
+  }
+  &__date {
+    color: $dark-gray;
+    font-size: rem-calc(13);
+    line-height: rem-calc(19);
+  }
+  @include breakpoint(medium) {
+    border-right: 1px solid $light-gray;
+    border-left: 1px solid $light-gray;
+  }
+}
+.answer {
+  //margin-bottom: 14px;
+  //padding: 20px;
+  &-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    min-height: 40px;
+    padding-left: 82px;
+    &__name {
+      font-size: rem-calc(18);
+      line-height: rem-calc(22);
+      font-weight: normal;
+    }
+    &__image {
+      position: absolute;
+      top: 0;
+      left: 27px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+  }
+  &-header {
+    margin-bottom: 4px;
+  }
+  &-body {
+    margin-bottom: 20px;
+    padding-left: 82px;
+  }
+  &__arrow {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    color: #d1d1d1;
+  }
+  &__date {
+    color: $dark-gray;
+    font-size: rem-calc(13);
+    line-height: rem-calc(19);
+  }
+  @include breakpoint(medium) {
+    margin-left: 82px;
+  }
+  @include breakpoint(large) {
+    margin-left: 82px;
+  }
+}
+.show-for-small-only {
+  @include breakpoint(medium) {
+    display: none;
+  }
+}
+
+.mfp {
+  &-close {
+    font-size: rem-calc(24);
+  }
 }

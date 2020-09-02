@@ -1,19 +1,24 @@
 /**
  * Variables
 */
+$global-font-size: 100%;
+$global-width: 1280px;
+$global-margin: 14px;
 
-/* Typography */
-/* Breakpoints */
-/* Paths */
-/* Grid setup */
-/* Colour palette */
+
+$body-font-family: 'Proxima Nova', arial, serif;
+
 $black: #000;
 $white: #fff;
 
-$body-background-color: #333;
-$foreground-color: #fff;
-$caption-color: #464646;
-$accent-color: #999;
-$link-color: #ec1f4e;
+$light-gray: #f1f1f1;
+$medium-gray: #f8f8f8;
+$dark-gray: #9a9a9a;
 
-/* Components */
+$alert-color: #DC3E48;
+
+$body-background: #fff;
+$body-font-color: #1d1d1d;
+
+$heading-color: $body-font-color;
+$link-color: #3E8BDC;

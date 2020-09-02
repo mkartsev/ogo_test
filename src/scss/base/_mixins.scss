@@ -2,9 +2,6 @@
  * Helper mixins
 */
 
-// Clearfix
-// http://www.cssmojo.com/latest_new_clearfix_so_far/
-// Other clearfix options: https://github.com/stubbornella/oocss/blob/master/oocss/src/components/utils/_clearfix-me.scss
 @mixin clearfix {
   &::after {
     clear: both;
@@ -14,11 +11,15 @@
 }
 
 // Media queries
-@mixin bp($point) {
-  @if $point == large {
-    @media (min-width: 1280px) { @content; }
-  } @else if $point == small {
-    @media (max-width: 1279px) { @content; }
+@mixin breakpoint($point) {
+  @if $point == small {
+    @media (max-width: 640px) { @content; }
+  } 
+  @else if $point == medium {
+    @media (min-width: 641px) { @content; }
+  }
+  @else if $point == large {
+    @media (min-width: 1024px) { @content; }
   }
 }
 
