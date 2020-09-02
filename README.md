@@ -14,5 +14,5 @@ $ npm run watch
 ### Сборка
 
 ```sh
-$ npm run build
+$ npm run production
 ```
